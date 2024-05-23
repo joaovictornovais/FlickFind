@@ -1,6 +1,7 @@
 package br.com.flickfind.auth.services;
 
 import br.com.flickfind.auth.domain.user.User;
+import br.com.flickfind.auth.domain.user.UserRole;
 import br.com.flickfind.auth.dtos.LoginRequestDTO;
 import br.com.flickfind.auth.dtos.RegisterRequestDTO;
 import br.com.flickfind.auth.dtos.ResponseDTO;
@@ -47,6 +48,7 @@ public class UserService {
             User user = new User(registerRequestDTO);
             user.setPassword(passwordEncoder.encode(registerRequestDTO.password()));
             user.setVerificationCode(GenerateVerificationCode.generateVerificationCode());
+            user.setRole(UserRole.USER);
             user = userRepository.save(user);
 
             userProducer.sendConfirmEmail(user);
