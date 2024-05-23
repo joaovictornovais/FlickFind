@@ -1,8 +1,8 @@
 package br.com.flickfind.auth.controllers;
 
-import br.com.flickfind.auth.dto.LoginRequestDTO;
-import br.com.flickfind.auth.dto.RegisterRequestDTO;
-import br.com.flickfind.auth.dto.ResponseDTO;
+import br.com.flickfind.auth.dtos.LoginRequestDTO;
+import br.com.flickfind.auth.dtos.RegisterRequestDTO;
+import br.com.flickfind.auth.dtos.ResponseDTO;
 import br.com.flickfind.auth.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

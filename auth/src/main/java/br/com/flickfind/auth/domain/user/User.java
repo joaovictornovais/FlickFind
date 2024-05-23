@@ -1,6 +1,6 @@
 package br.com.flickfind.auth.domain.user;
 
-import br.com.flickfind.auth.dto.RegisterRequestDTO;
+import br.com.flickfind.auth.dtos.RegisterRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +37,9 @@ public class User implements UserDetails {
     private String password;
     private UserRole role;
 
+    private String verificationCode;
+    private boolean enabled;
+
     public User(RegisterRequestDTO registerRequestDTO) {
         BeanUtils.copyProperties(registerRequestDTO, this);
     }
@@ -71,6 +74,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

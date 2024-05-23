@@ -1,4 +1,4 @@
-package br.com.flickfind.auth.dto;
+package br.com.flickfind.auth.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
