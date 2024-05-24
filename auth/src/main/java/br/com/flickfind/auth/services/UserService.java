@@ -76,6 +76,7 @@ public class UserService {
         if (user.getVerificationCode().equals(verificateAccountDTO.key()) && !user.isEnabled()) {
             user.setEnabled(true);
             userRepository.save(user);
+            userProducer.createProfile(user);
         }
         else throw new InvalidArgumentException("Wrong code or user is already activated");
     }
