@@ -2,6 +2,7 @@ package br.com.flickfind.auth.producers;
 
 import br.com.flickfind.auth.domain.user.User;
 import br.com.flickfind.auth.dtos.EmailDTO;
+import br.com.flickfind.auth.utils.TemplateEmail;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class UserProducer {
                 user.getId(),
                 user.getEmail(),
                 "Falta pouco para completar o seu cadastro! Confirme a sua conta",
-                "Seja bem-vindo(a)! O seu código é: " + user.getVerificationCode()
+                TemplateEmail.verificateAccount(user)
         );
 
         rabbitTemplate.convertAndSend("", routingKey, emailDTO);

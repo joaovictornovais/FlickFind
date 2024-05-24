@@ -1,4 +1,4 @@
 package br.com.flickfind.auth.dtos;
 
-public record VerificateAccountDTO(String email, String code) {
+public record VerificateAccountDTO(String userId, String key) {
 }

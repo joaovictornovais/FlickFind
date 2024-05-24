@@ -40,6 +40,10 @@ public class UserService {
         return user.get();
     }
 
+    public User findById(String id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
     @Transactional
     public ResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         try {
@@ -67,10 +71,12 @@ public class UserService {
         throw new InvalidArgumentException("Invalid credentials");
     }
 
-    public void activeUser(VerificateAccountDTO verificateAccountDTO) {
-        User user = findByEmail(verificateAccountDTO.email());
-        if (user.getVerificationCode().equals(verificateAccountDTO.code()) && !user.isEnabled())
+    public void activateUser(VerificateAccountDTO verificateAccountDTO) {
+        User user = findById(verificateAccountDTO.userId());
+        if (user.getVerificationCode().equals(verificateAccountDTO.key()) && !user.isEnabled()) {
             user.setEnabled(true);
+            userRepository.save(user);
+        }
         else throw new InvalidArgumentException("Wrong code or user is already activated");
     }
 
