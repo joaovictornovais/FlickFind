@@ -36,7 +36,7 @@ public class UserProducer {
 
     public void createProfile(User user) {
         ProfileDTO profileDTO =
-                new ProfileDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
+                new ProfileDTO(user.getFirstName(), user.getLastName(), user.getEmail());
         rabbitTemplate.convertAndSend("", profileRoutingKey, profileDTO);
     }
 
