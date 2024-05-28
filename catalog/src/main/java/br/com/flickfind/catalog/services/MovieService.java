@@ -3,16 +3,16 @@ package br.com.flickfind.catalog.services;
 import br.com.flickfind.catalog.controllers.MovieResponse;
 import br.com.flickfind.catalog.domain.movie.Movie;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
-@FeignClient(name = "movie", url = "https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${api.tmdb.key}")
+@FeignClient(name = "movies", url = "https://api.themoviedb.org/3/discover/movie")
 public interface MovieService {
 
     @RequestMapping(method = RequestMethod.GET)
-    MovieResponse getMovies();
+    MovieResponse getMovies(@RequestParam Map<String, String> filters);
+
 
 }
