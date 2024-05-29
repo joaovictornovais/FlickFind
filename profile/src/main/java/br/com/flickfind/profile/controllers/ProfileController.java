@@ -1,8 +1,11 @@
 package br.com.flickfind.profile.controllers;
 
+import br.com.flickfind.profile.configs.Patcher;
+import br.com.flickfind.profile.domain.filter.Filter;
 import br.com.flickfind.profile.domain.profile.Profile;
 import br.com.flickfind.profile.dtos.ProfileAdditionalInfoDTO;
 import br.com.flickfind.profile.dtos.TokenResponseDTO;
+import br.com.flickfind.profile.services.FilterService;
 import br.com.flickfind.profile.services.ProfileService;
 import br.com.flickfind.profile.services.TokenValidationService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,16 +13,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.FileTime;
+
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final FilterService filterService;
     private final TokenValidationService tokenValidationService;
 
-    public ProfileController(TokenValidationService tokenValidationService, ProfileService profileService) {
+    private final Patcher patcher;
+
+    public ProfileController(TokenValidationService tokenValidationService,
+                             ProfileService profileService,
+                             Patcher patcher,
+                             FilterService filterService) {
         this.tokenValidationService = tokenValidationService;
         this.profileService = profileService;
+        this.patcher = patcher;
+        this.filterService = filterService;
     }
 
     @PutMapping
@@ -27,6 +40,18 @@ public class ProfileController {
         String token = request.getHeader("Authorization").replace("Bearer ", "");
         TokenResponseDTO response = tokenValidationService.returnTokenEmail(token);
         return ResponseEntity.status(HttpStatus.OK).body(profileService.editProfile(response, profileAdditionalInfoDTO));
+    }
+
+    @PatchMapping
+    public ResponseEntity<Filter> patchFilter(@RequestBody Filter incompleteFilter) {
+        Filter existingFilter = filterService.findById(incompleteFilter.getId());
+        try {
+            patcher.internPatcher(existingFilter, incompleteFilter);
+            filterService.save(existingFilter);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(existingFilter);
     }
 
 }
