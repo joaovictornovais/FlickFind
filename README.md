@@ -2,6 +2,7 @@
 
 <p align="center">
  <a href="#tech">Tecnologias</a> • 
+ <a href="#practices">Práticas adotadas</a> •
  <a href="#started">Começando</a> • 
   <a href="#routes">API Endpoints</a>
 </p>
@@ -17,6 +18,7 @@
 - RabbitMQ.
 
 <h2 id="practices">🧭 Práticas adotadas</h2>
+
 - API Rest;
 - SOLID;
 - Consultas com Spring Data JPA;
