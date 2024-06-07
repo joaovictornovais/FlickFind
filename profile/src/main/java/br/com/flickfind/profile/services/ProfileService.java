@@ -1,6 +1,7 @@
 package br.com.flickfind.profile.services;
 
 import br.com.flickfind.profile.domain.profile.Profile;
+import br.com.flickfind.profile.dtos.FilterDTO;
 import br.com.flickfind.profile.dtos.ProfileAdditionalInfoDTO;
 import br.com.flickfind.profile.dtos.ProfileDTO;
 import br.com.flickfind.profile.dtos.TokenResponseDTO;
@@ -39,6 +40,11 @@ public class ProfileService {
     public Profile findByEmail(String email) {
         return profileRepository.findByEmail(email).orElseThrow(()
                 -> new EntityNotFoundException("Profile not found"));
+    }
+
+    public FilterDTO getUserFilters(String email) {
+        Profile profile = findByEmail(email);
+        return new FilterDTO(profile.getFilter());
     }
 
 }

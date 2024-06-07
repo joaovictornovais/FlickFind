@@ -1,6 +1,5 @@
-package br.com.flickfind.catalog.controllers;
+package br.com.flickfind.catalog.domain.movie;
 
-import br.com.flickfind.catalog.domain.movie.Movie;
 import lombok.Data;
 
 import java.util.Set;

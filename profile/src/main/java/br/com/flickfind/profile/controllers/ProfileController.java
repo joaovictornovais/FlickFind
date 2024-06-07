@@ -3,6 +3,7 @@ package br.com.flickfind.profile.controllers;
 import br.com.flickfind.profile.configs.Patcher;
 import br.com.flickfind.profile.domain.filter.Filter;
 import br.com.flickfind.profile.domain.profile.Profile;
+import br.com.flickfind.profile.dtos.FilterDTO;
 import br.com.flickfind.profile.dtos.ProfileAdditionalInfoDTO;
 import br.com.flickfind.profile.dtos.TokenResponseDTO;
 import br.com.flickfind.profile.exceptions.UnauthorizedException;
@@ -53,6 +54,13 @@ public class ProfileController {
             throw new UnauthorizedException("You need to login");
         }
         return ResponseEntity.status(HttpStatus.OK).body(existingFilter);
+    }
+
+    @GetMapping
+    public ResponseEntity<FilterDTO> findUserFilters(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        TokenResponseDTO response = tokenValidationService.returnTokenEmail(token);
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getUserFilters(response.email()));
     }
 
 }

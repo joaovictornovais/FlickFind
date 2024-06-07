@@ -1,0 +1,26 @@
+package br.com.flickfind.catalog.dtos;
+
+public record FilterDTO(String certification,
+         String certification_country,
+         boolean include_adult,
+         String language,
+         Integer primary_release_year,
+         String region,
+         String sort_by,
+         String watch_region,
+         String with_cast,
+         String with_companies,
+         String with_crew,
+         String with_genres,
+         String with_keywords,
+         String with_origin_country,
+         String with_original_language,
+         String with_people,
+         String with_watch_monetization_types,
+         String with_watch_providers,
+         String without_companies,
+         String without_genres,
+         String without_keywords,
+         String without_watch_providers,
+         Integer year) {
+}
