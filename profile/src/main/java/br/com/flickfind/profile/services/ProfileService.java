@@ -1,6 +1,5 @@
 package br.com.flickfind.profile.services;
 
-import br.com.flickfind.profile.domain.filter.Filter;
 import br.com.flickfind.profile.domain.profile.Profile;
 import br.com.flickfind.profile.dtos.ProfileAdditionalInfoDTO;
 import br.com.flickfind.profile.dtos.ProfileDTO;
@@ -8,8 +7,6 @@ import br.com.flickfind.profile.dtos.TokenResponseDTO;
 import br.com.flickfind.profile.exceptions.EntityNotFoundException;
 import br.com.flickfind.profile.repositories.ProfileRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class ProfileService {

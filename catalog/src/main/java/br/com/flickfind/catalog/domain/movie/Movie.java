@@ -1,11 +1,9 @@
 package br.com.flickfind.catalog.domain.movie;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class Movie {

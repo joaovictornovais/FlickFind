@@ -1,11 +1,11 @@
 package br.com.flickfind.catalog.services;
 
 import br.com.flickfind.catalog.controllers.MovieResponse;
-import br.com.flickfind.catalog.domain.movie.Movie;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Map;
 
 @FeignClient(name = "movies", url = "https://api.themoviedb.org/3/discover/movie")

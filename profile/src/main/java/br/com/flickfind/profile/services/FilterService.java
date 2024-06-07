@@ -1,11 +1,8 @@
 package br.com.flickfind.profile.services;
 
 import br.com.flickfind.profile.domain.filter.Filter;
-import br.com.flickfind.profile.domain.profile.Profile;
 import br.com.flickfind.profile.repositories.FilterRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class FilterService {
@@ -14,14 +11,6 @@ public class FilterService {
 
     public FilterService(FilterRepository filterRepository) {
         this.filterRepository = filterRepository;
-    }
-
-
-    public Filter createFilter(Profile profile) {
-        Filter filter = new Filter();
-        filter.setId(UUID.randomUUID().toString());
-        filter.setProfile(profile);
-        return filter;
     }
 
 

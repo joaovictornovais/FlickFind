@@ -1,13 +1,11 @@
 package br.com.flickfind.email.services;
 
 import br.com.flickfind.email.domain.email.Email;
-import br.com.flickfind.email.dtos.EmailDTO;
 import br.com.flickfind.email.dtos.EmailStatus;
 import br.com.flickfind.email.repositories.EmailRepository;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
