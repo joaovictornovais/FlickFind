@@ -5,6 +5,7 @@ import br.com.flickfind.profile.domain.filter.Filter;
 import br.com.flickfind.profile.domain.profile.Profile;
 import br.com.flickfind.profile.dtos.ProfileAdditionalInfoDTO;
 import br.com.flickfind.profile.dtos.TokenResponseDTO;
+import br.com.flickfind.profile.exceptions.UnauthorizedException;
 import br.com.flickfind.profile.services.FilterService;
 import br.com.flickfind.profile.services.ProfileService;
 import br.com.flickfind.profile.services.TokenValidationService;
@@ -41,13 +42,15 @@ public class ProfileController {
     }
 
     @PatchMapping
-    public ResponseEntity<Filter> patchFilter(@RequestBody Filter incompleteFilter) {
-        Filter existingFilter = filterService.findById(incompleteFilter.getId());
+    public ResponseEntity<Filter> patchFilter(@RequestBody Filter incompleteFilter, HttpServletRequest request) {
+        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        TokenResponseDTO response = tokenValidationService.returnTokenEmail(token);
+        Filter existingFilter = profileService.findByEmail(response.email()).getFilter();
         try {
             patcher.internPatcher(existingFilter, incompleteFilter);
             filterService.save(existingFilter);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new UnauthorizedException("You need to login");
         }
         return ResponseEntity.status(HttpStatus.OK).body(existingFilter);
     }
